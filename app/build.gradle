@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.udacity.gradle.builditbigger"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        free {
+            applicationId "com.udacity.gradle.builditbigger.free"
+            minSdkVersion 15
+            targetSdkVersion 23
+            testInstrumentationRunner 'com.android.test.runner.MultiDexTestRunner'
+            versionCode 1
+            versionName '1.0'
+        }
+        paid {
+            applicationId "com.udacity.gradle.builditbigger.paid"
+            minSdkVersion 15
+            targetSdkVersion 23
+            testInstrumentationRunner 'com.android.test.runner.MultiDexTestRunner'
+            versionCode 1
+            versionName '1.0'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // Added for AdMob
+    // Added for Java Library
+    compile project(':jokelib')
+    // Added for Android Library
+    compile project(':myandroidlib')
+    compile project(path: ':backend', configuration: 'android-endpoints')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.1.0'
+    compile 'com.google.android.gms:play-services:9.2.1'
+    compile 'com.google.android.gms:play-services-ads:9.2.1'
+    compile 'com.google.android.gms:play-services-auth:9.2.1'
+    compile 'com.google.android.gms:play-services-gcm:9.2.1'
+}
